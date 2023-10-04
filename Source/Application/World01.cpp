@@ -50,17 +50,20 @@ namespace nc
             glRotatef(m_angle, 1, 1, 1);
             glScalef(sin((m_time * 5) + 1) * 0.2f, 1, 1);
 
-            glBegin(GL_TRIANGLES);
+            glBegin(GL_QUADS);
 
             glColor3f(1, 0, 1);
             glVertex2f(-0.25f, -0.25f);
 
-            glColor3f(1, 1, 1);
-            glVertex2f(0, 0.25f);
 
             glColor3f(0, 1, 1);
             glVertex2f(0.25f, -0.25f);
 
+            glColor3f(1, 1, 1);
+            glVertex2f(0.25f, 0.25f);
+
+            glColor3f(0, 1, 1);
+            glVertex2f(-0.25f, 0.25f);
             glEnd();
 
         glPopMatrix();
