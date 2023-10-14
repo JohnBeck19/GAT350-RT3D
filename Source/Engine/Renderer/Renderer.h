@@ -2,8 +2,11 @@
 #include "Framework/System.h"
 #include "Font.h"
 #include "Model.h"
-#include "Text.h"
 #include "Texture.h"
+#include "Shader.h"
+#include "Program.h"
+#include "Gui.h"
+#include "VertexBuffer.h"
 
 #include <glad/include/glad/glad.h>
 #include <SDL2-2.28.4/include/SDL.h>
@@ -42,6 +45,7 @@ namespace nc
 
 		friend class Text;
 		friend class Texture;
+		friend class Gui;
 
 	private:
 		int m_width = 0;
