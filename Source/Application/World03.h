@@ -1,6 +1,7 @@
 #pragma once
 #include "Framework/World.h"
 #include "Renderer/Renderer.h"
+#include "Core/Math/Transform.h"
 #include <vector>
 namespace nc
 {
@@ -16,11 +17,14 @@ namespace nc
 		float m_time;
 		float m_speed = 5;
 
+
+
 		Transform m_transform;
 		
 
 		res_t<VertexBuffer> m_vertexBuffer;
 		res_t<Program> m_program;
+		res_t<Material> m_material;
 		res_t<Texture> m_texture;
 
 	};
