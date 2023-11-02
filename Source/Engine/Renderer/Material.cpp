@@ -1,6 +1,7 @@
 #include "Material.h"
 #include "Program.h"
 #include "Texture.h"
+#include "Cubemap.h"
 #include "Core/Core.h"
 
 namespace nc
@@ -31,8 +32,52 @@ namespace nc
 			m_textures.push_back(GET_RESOURCE(Texture, texture));
 		}
 
-		READ_DATA(document, diffuse);
+
+		std::string albedoTextureName;
+
+		if (READ_NAME_DATA(document, "albedoTexture", albedoTextureName))
+		{
+			params |= ALBEDO_TEXTURE_MASK;
+			albedoTexture = GET_RESOURCE(Texture, albedoTextureName);
+		}
+
+		std::string specularTextureName;
+
+		if (READ_NAME_DATA(document, "specularTexture", specularTextureName))
+		{
+			params |= SPECULAR_TEXTURE_MASK;
+			specularTexture = GET_RESOURCE(Texture, specularTextureName);
+		}
+
+		std::string omissiveTextureName;
+
+		if (READ_NAME_DATA(document, "omissiveTexture", omissiveTextureName))
+		{
+			params |= OMISSIVE_TEXTURE_MASK;
+			omissiveTexture = GET_RESOURCE(Texture, omissiveTextureName);
+		}
+
+		std::string normalTextureName;
+
+		if (READ_NAME_DATA(document, "normalTexture", normalTextureName))
+		{
+			params |= NORMAL_TEXTURE_MASK;
+			normalTexture = GET_RESOURCE(Texture, normalTextureName);
+		}
+		std::string cubemapName;
+
+		if (READ_NAME_DATA(document, "cubemap", cubemapName))
+		{
+			params |= CUBEMAP_TEXTURE_MASK;
+			std::vector<std::string> cubemaps;
+			READ_DATA(document, cubemaps);
+			cubemapTexture = GET_RESOURCE(Cubemap, cubemapName,cubemaps);
+
+		}
+
+		READ_DATA(document, albedo);
 		READ_DATA(document, specular);
+		READ_DATA(document, omissive);
 		READ_DATA(document, shininess);
 		READ_DATA(document, tiling);
 		READ_DATA(document, offset);
@@ -44,23 +89,47 @@ namespace nc
 	void Material::Bind()
 	{
 		m_program->Use();
-		m_program->SetUniform("material.diffuse", diffuse);
+		m_program->SetUniform("material.params", params);
+		m_program->SetUniform("material.albedo", albedo);
 		m_program->SetUniform("material.specular", specular);
 		m_program->SetUniform("material.shininess", shininess);
+		m_program->SetUniform("material.omissive", omissive);
 		m_program->SetUniform("material.tiling", tiling);
 		m_program->SetUniform("material.offset", offset);
-		for (size_t i = 0; i < m_textures.size(); i++)
+
+		if (albedoTexture)
 		{
-			m_textures[i]->SetActive(GL_TEXTURE0 + (int)i);
-			m_textures[i]->Bind();
+			albedoTexture->SetActive(GL_TEXTURE0);
+			albedoTexture->Bind();
+		}
+		if (specularTexture)
+		{
+			specularTexture->SetActive(GL_TEXTURE1);
+			specularTexture->Bind();
+		}
+		if (normalTexture)
+		{
+			normalTexture->SetActive(GL_TEXTURE2);
+			normalTexture->Bind();
+		}
+		if (omissiveTexture)
+		{
+			omissiveTexture->SetActive(GL_TEXTURE3);
+			omissiveTexture->Bind();
+		}
+		if (cubemapTexture)
+		{
+			cubemapTexture->SetActive(GL_TEXTURE0);
+			cubemapTexture->Bind();
 		}
 	}
 	void Material::ProcessGui()
 	{
 		ImGui::Begin("Material");
-		ImGui::ColorEdit3("Diffuse", glm::value_ptr(diffuse));
+		ImGui::ColorEdit3("Albedo", glm::value_ptr(albedo));
 		ImGui::ColorEdit3("Specular", glm::value_ptr(specular));
 		ImGui::DragFloat("Shininess", &shininess,0.1f,2.0f,200.0f);
+		ImGui::ColorEdit3("Omissive", glm::value_ptr(omissive));
 		ImGui::DragFloat2("Tiling", glm::value_ptr(tiling));
 		ImGui::DragFloat2("offset", glm::value_ptr(offset),0.1f);
 		ImGui::End();

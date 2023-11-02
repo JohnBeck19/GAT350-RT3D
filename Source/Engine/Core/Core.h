@@ -6,7 +6,7 @@
 #include "Json.h"
 //#include "Memory.h"
 #include "Time.h"
-
+#include "StringUtils.h"
 #include "Math/Color.h"
 #include "Math/Rect.h"
 #include "Math/Vector2.h"
