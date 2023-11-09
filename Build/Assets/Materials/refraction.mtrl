@@ -1,12 +1,12 @@
 {
   "program": "shaders/refraction.prog",
-  "cubemap": "night_cubemap",
+  "cubemap": "PalmTrees",
   "cubemaps": [
-    "textures/night_cubemap/posx.jpg",
-    "textures/night_cubemap/negx.jpg",
-    "textures/night_cubemap/posy.jpg",
-    "textures/night_cubemap/negy.jpg",
-    "textures/night_cubemap/posz.jpg",
-    "textures/night_cubemap/negz.jpg"
+    "textures/PalmTrees/posx.jpg",
+    "textures/PalmTrees/negx.jpg",
+    "textures/PalmTrees/posy.jpg",
+    "textures/PalmTrees/negy.jpg",
+    "textures/PalmTrees/posz.jpg",
+    "textures/PalmTrees/negz.jpg"
   ]
 }

@@ -9,7 +9,7 @@ namespace nc
     {
         for (int i = 0; i < 10; i++)
         {
-            m_pos.push_back(vec2{ randomf(-0.25f, 0.25f), randomf(-0.25f, 0.25f) });
+            m_pos.push_back(glm::vec2{ randomf(-0.25f, 0.25f), randomf(-0.25f, 0.25f) });
         }
         return true;
     }

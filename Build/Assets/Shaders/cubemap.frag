@@ -10,4 +10,3 @@ void main()
 {
 	ocolor = texture(cubemap, ftexcoord);
 }
-

@@ -1,5 +1,5 @@
 {
-  "program": "shaders/reflection.prog",
+  "program": "shaders/skybox.prog",
   "cubemap": "PalmTrees",
   "cubemaps": [
     "textures/PalmTrees/posx.jpg",

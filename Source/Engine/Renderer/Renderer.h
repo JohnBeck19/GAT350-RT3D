@@ -9,6 +9,7 @@
 #include "Gui.h"
 #include "VertexBuffer.h"
 #include "Material.h"
+#include "Framebuffer.h"
 #include "Core/Core.h"
 
 #include <glad/include/glad/glad.h>
@@ -29,7 +30,7 @@ namespace nc
 		void Update() {}
 
 		void CreateWindow(const std::string& title, int width, int height);
-		void BeginFrame();
+		void BeginFrame(const glm::vec3& color = glm::vec3{0});
 		void EndFrame();
 
 		void SetColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
@@ -37,6 +38,9 @@ namespace nc
 		void DrawLine(float x1, float y1, float x2, float y2);
 		void DrawPoint(int x, int y);
 		void DrawPoint(float x, float y);
+
+		void setViewport(int width, int height);
+		void resetViewport();
 
 		void DrawTexture(class Texture* texture, float x, float y, float angle = 0.0f);
 		void DrawTexture(class Texture* texture, const Transform& transform);

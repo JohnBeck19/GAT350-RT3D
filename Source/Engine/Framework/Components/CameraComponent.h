@@ -17,7 +17,6 @@ namespace nc
 		void SetLookAt(const glm::vec3& eye, const glm::vec3& center, const glm::vec3& up = { 0, 1, 0 });
 
 		void SetProgram(const res_t<Program> program);
-
 	public:
 		glm::mat4 projection{ 1 };
 		glm::mat4 view{ 1 };
